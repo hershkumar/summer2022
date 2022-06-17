@@ -1,0 +1,20 @@
+\documentclass{notes}
+\usepackage{amsmath}
+\usepackage{braket}
+
+\title{Anharmonic Oscillator Ground State Energy}
+\author{Hersh Kumar}
+\begin{document}
+We have the potential $V(x) = \frac{1}{2}m\omega^2 x^2 + \lambda x^4$, and we want to compute the ground state energy of the system. Since we know the ground state solution to the harmonic oscillator, we let $H^0 = \frac{1}{2}m\omega^2 x^2$, and let $H^1 = \lambda x^4$. We then have that $\psi_0^0 = \left(\frac{m\omega}{\pi \hbar}\right)^{1/4} e^{-m\omega x^2/2\hbar}$, and $E_0^0 = \frac{1}{2}\hbar \omega$. We can now compute the first order corrections to the energy, $E_0^1$.
+\begin{align*}
+E_0^1 &= \braket{\psi_0^0 | H^1|\psi_0^0} \\ 
+&= \left(\frac{m\omega}{\pi\hbar}\right)^{1/2}\lambda \int e^{-m\omega x^2/\hbar}x^4\,dx \\
+&= \frac{3}{4}\left(\frac{m\omega}{\pi\hbar}\right)^{1/2}\lambda \left(\frac{\pi \hbar^5}{m^5\omega^5}\right)^{1/2}\\ 
+&= \frac{3}{4}\lambda
+\end{align*}
+Where we have let $m = \omega = \hbar = 1$, and we have used the known solution to the gaussian integral
+$$\int x^4 e^{-ax^2}\,dx = \frac{3}{4}\frac{\sqrt{\pi}}{a^{5/2}}$$
+Now applying the first order corrections, we have that the ground state energy is given by
+$$E_{0} = \frac{1}{2} + \frac{3}{4}\lambda$$
+
+\end{document}
