@@ -5,7 +5,7 @@
 \title{Anharmonic Oscillator Ground State Energy}
 \author{Hersh Kumar}
 \begin{document}
-We have the potential $V(x) = \frac{1}{2}m\omega^2 x^2 + \lambda x^4$, and we want to compute the ground state energy of the system. Since we know the ground state solution to the harmonic oscillator, we let $H^0 = \frac{1}{2}m\omega^2 x^2$, and let $H^1 = \lambda x^4$. We then have that $\psi_0^0 = \left(\frac{m\omega}{\pi \hbar}\right)^{1/4} e^{-m\omega x^2/2\hbar}$, and $E_0^0 = \frac{1}{2}\hbar \omega$. We can now compute the first order corrections to the energy, $E_0^1$.
+We have the potential $V(x) = \frac{1}{2}m\omega^2 x^2 + \lambda x^4$, and we want to compute the ground state energy of the system. Since we know the ground state solution to the harmonic oscillator, we let $H^0 = -\frac{\hbar^2}{2m}\frac{\partial ^2}{\partial x^2} + \frac{1}{2}m\omega^2 x^2$, and let $H^1 = \lambda x^4$. We then have that $\psi_0^0 = \left(\frac{m\omega}{\pi \hbar}\right)^{1/4} e^{-m\omega x^2/2\hbar}$, and $E_0^0 = \frac{1}{2}\hbar \omega$. We can now compute the first order corrections to the energy, $E_0^1$.
 \begin{align*}
 E_0^1 &= \braket{\psi_0^0 | H^1|\psi_0^0} \\ 
 &= \left(\frac{m\omega}{\pi\hbar}\right)^{1/2}\lambda \int e^{-m\omega x^2/\hbar}x^4\,dx \\
@@ -17,4 +17,23 @@ $$\int x^4 e^{-ax^2}\,dx = \frac{3}{4}\frac{\sqrt{\pi}}{a^{5/2}}$$
 Now applying the first order corrections, we have that the ground state energy is given by
 $$E_{0} = \frac{1}{2} + \frac{3}{4}\lambda$$
 
+
+We now want to compute the second order corrections to the energy.
+From perturbation theory, we have that the second order corrections to the $n$th energy level
+are given by 
+$$E_{n}^2 = \sum_{m\neq n} \frac{|\braket{\psi_m^0|H^1|\psi_n^0}|^2}{E_n^0 - E_m^0}$$
+
+We can represent $H^1 = x^4$ using the harmonic oscillator raising and lowering operators:
+$$\hat{x} = \sqrt{\frac{1}{2}}(\hat{a} + \hat{a}^\dagger)$$
+$$\hat{x}^4 = \frac{1}{4}(aa + aa^\dagger + a^\dagger a + a^\dagger a^\dagger)^2$$
+If we do this out, we have 16 terms. We note that we are interested in the ground state, where $n=0$. We also note that the lowering operator $a$ cannot lower below the ground state,
+and thus any of the 16 terms that try to lower past the ground state can be discarded. This leaves us with 6 terms, two of which can be further removed because the end state is the ground state.
+Since the summation for the energy correction disallows $m=n=0$, this means that we can disregard those two terms, leaving us with 4 terms:
+$$\hat{x}^4 = \frac{1}{4}(a a^\dagger a^\dagger a^\dagger + a^\dagger a a^\dagger a^\dagger + a^\dagger a ^\dagger a a^\dagger + a^\dagger a^\dagger a^\dagger a^\dagger)$$
+Now computing the numerator of the correction (where I have replaced $\psi_0^0$ with $\ket{0}$ for simplicity's sake):
+$$\braket{m|H^1|0} = \braket{m|\hat{x}^4|0} = \frac{1}{4}(3\sqrt{2}\delta_{m,2} + 2\sqrt{2}\delta_{m,2} + \sqrt{2}\delta_{m,2} + 2\sqrt{6}\delta_{m,4})$$
+Now computing the corrections to the energy:
+$$E_0^{(2)} = \frac{\left(\frac{1}{4}\cdot 6\sqrt{2}\right)^2}{-2} + \frac{\left(\frac{1}{4}\cdot 2\sqrt{6}\right)^2}{-4} = -\frac{21}{8}$$
+Thus, using the corrections to the energy, we have that 
+$$E_0 \approx \frac{1}{2} + \frac{3}{4}\lambda - \frac{21}{8}\lambda^2$$
 \end{document}
