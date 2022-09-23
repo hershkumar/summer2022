@@ -1,0 +1,18 @@
+\documentclass{notes}
+
+\usepackage{amsmath}
+\usepackage{braket}
+
+\title{Astrakharchik Model Gradient Computations}
+\date{}
+
+\begin{document}
+	We begin by writing out the Hamiltonian:
+	$$\hat{H} = \sum_{i=1}^N \left(-\frac{\hbar^2}{2m}\frac{\partial^2}{\partial x_i^2} + \frac{m\omega^2x_i^2}{2}\right) + \sum_{i<j}\left[g\delta(x_i - x_j) + \omega g |x_i - x_j|\right]$$
+
+	We assume our wavefunction is of the form
+	$$\psi = e^{-f(\vec{x})}$$
+	for some neural network function $f$. Computing the average energy:
+	$$\braket{\psi|\hat{H}|\psi} = \int d\vec{x}\, e^{-f(\vec{x})} \left[\sum_{i=1}^N -\frac{\hbar^2}{2m}\frac{\partial^2}{\partial x_i^2}e^{-f(\vec{x})} + \frac{m\omega^2 x_i^2}{2}e^{-f(\vec{x})} + \sum_{i<j}(g\delta(x_i-x_j) + \omega g|x_i - x_j|)e^{-f(\vec{x})}\right]$$
+
+\end{document}
