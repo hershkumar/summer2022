@@ -14,5 +14,7 @@
 	$$\psi = e^{-f(\vec{x})}$$
 	for some neural network function $f$. Computing the average energy:
 	$$\braket{\psi|\hat{H}|\psi} = \int d\vec{x}\, e^{-f(\vec{x})} \left[\sum_{i=1}^N -\frac{\hbar^2}{2m}\frac{\partial^2}{\partial x_i^2}e^{-f(\vec{x})} + \frac{m\omega^2 x_i^2}{2}e^{-f(\vec{x})} + \sum_{i<j}(g\delta(x_i-x_j) + \omega g|x_i - x_j|)e^{-f(\vec{x})}\right]$$
-
+	The left summation is doable without any modifications, but we need to deal with the delta function in the second summation. By the nature of the delta function, every term in the summation where $i \neq j$ will have 0 impact. For this reason, we can remove the delta function, and just have that the input to $f$ is modified so that $x_i = x_j$. Let us call this $\vec{x'}$.
+	$$\int d\vec{x}\, e^{-f(\vec{x})} \left[\sum_{i=1}^N -\frac{\hbar^2}{2m}\frac{\partial^2}{\partial x_i^2}e^{-f(\vec{x})} + \frac{m\omega^2 x_i^2}{2}e^{-f(\vec{x})} + \sum_{i<j}\left(ge^{-f(\vec{x'})} + \omega g|x_i - x_j|e^{-f(\vec{x})}\right)\right]$$
+	This is now doable algorithmically.
 \end{document}
