@@ -1,0 +1,77 @@
+\documentclass{notes}
+
+\usepackage{amsmath}
+\usepackage{braket}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{bm}
+\usepackage{esint}
+\usepackage{gensymb}
+\usepackage{mathrsfs}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+
+
+\newtheorem{postulate}{Postulate}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{corollary}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\title{Fermionic Ansatz}
+\date{}
+
+\let\ve\varepsilon
+\let\vec\bm
+\begin{document}
+We have a system of $N$ fermions, $N^\uparrow$ being spin up, and  $N^\downarrow$  being spin down:
+\begin{align*}
+	\underbrace{x_1,\dots, x_{N^\uparrow}}_{\text{Up spin}}, \underbrace{x_{N^\uparrow +1}, \dots, x_N}_{\text{Down spins}}
+\end{align*}
+
+
+We can construct  $\Phi^\uparrow$ and  $\Phi^\downarrow$:
+ \begin{align*}
+	 \Phi^\uparrow(x_1,\dots x_N)&= \frac{1}{\sqrt{N!}} \begin{vmatrix}
+		 \phi_1(x_1, \overbrace{\underbrace{x_2,\dots x_{N^\uparrow}}_{\text{Symmetric}}, \dots x_N}^{\text{Remaining coordinates}}) & \phi_1(x_2, \underbrace{x_1,x_3,\dots x_{N^\uparrow}}_{\text{Symmetric}}, \dots x_N) & \cdots\\ 
+		 \phi_2(x_1, \underbrace{x_2, \dots x_{N^\uparrow}}_{\text{Symmetric}}, \dots x_N) & \phi_2(x_2, \underbrace{x_1,x_3,\dots, x_{N^\uparrow}}_{\text{Symmetric}}, \dots x_N)& \\ 
+		 \vdots & & \ddots 
+	 \end{vmatrix}
+\end{align*}
+Where $\Phi^\downarrow$ is constructed in the analogous way, using $N^\downarrow$ neural network functions, $\phi_{N^\uparrow +
+1}, \dots, \phi_{N}$.
+
+Our ansatz is 
+\begin{align*}
+	\Psi(x_1,\dots x_N) &=  \underbrace{\Phi^\uparrow(x_1,\dots x_N)}_{\text{Anti. } \uparrow} \underbrace{\Phi^\downarrow(x_1,\dots
+	x_N)}_{\text{Anti. } \downarrow} \underbrace{f(x_1,\dots x_N)}_{\text{Symmetric}}e^{-\sum x_i^2}
+\end{align*}
+
+
+\end{document}

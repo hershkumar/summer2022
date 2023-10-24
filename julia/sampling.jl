@@ -44,26 +44,5 @@ end
 
 # sample the distribution
 
-@time samples, samples_prime, acceptance_rate = sample(distribution, 1, 2, 10^4, 200, 10, 1)
-# println(samples)
+@time samples, samples_prime, acceptance_rate = sample(distribution, 1, 2, 10^4, 1000, 100, 1)
 
-# plot the samples
-using PyPlot
-pygui(true)
-
-figure(figsize=(5,5))
-# get a list of all the first values
-x = Float64[]
-for i in 1:size(samples, 1)
-    push!(x, samples[i, 1])
-end
-
-#histogram the x values
-hist(x, bins=20, density=true)
-# plot the distribution
-xs = -5:0.1:5
-ys = exp.(xs.^2 - xs.^4)
-plot(xs, ys, color="red")
-
-title("Acceptance rate = $acceptance_rate")
-plt.show()
