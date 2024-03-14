@@ -1,0 +1,149 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      4956,        141]
+NotebookOptionsPosition[      4234,        123]
+NotebookOutlinePosition[      4632,        139]
+CellTagsIndexPosition[      4589,        136]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   TemplateBox[<|
+    "boxes" -> FormBox["\[Sigma]", TraditionalForm], "errors" -> {}, "input" -> 
+     "\\sigma", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], " ", "=", " ", "1"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"g", " ", "=", " ", 
+   RowBox[{"-", "1"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   TemplateBox[<|"boxes" -> FormBox[
+       SubscriptBox[
+        StyleBox["N", "TI"], 
+        StyleBox["p", "TI"]], TraditionalForm], "errors" -> {}, "input" -> 
+     "N_p", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], "=", " ", "2"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"h", "=", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   TemplateBox[<|
+    "boxes" -> FormBox["\[Omega]", TraditionalForm], "errors" -> {}, "input" -> 
+     "\\omega", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], " ", "=", " ", "1"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"m", "=", "1"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  TemplateBox[<|"boxes" -> FormBox[
+      SubscriptBox[
+       StyleBox["E", "TI"], "0"], TraditionalForm], "errors" -> {}, "input" -> 
+    "E_0", "state" -> "Boxes"|>,
+   "TeXAssistantTemplate"], " ", "=", " ", 
+  RowBox[{
+   TemplateBox[<|"boxes" -> FormBox[
+       FractionBox[
+        RowBox[{
+          SubscriptBox[
+           StyleBox["N", "TI"], 
+           StyleBox["p", "TI"]], 
+          StyleBox["h", "TI"], "\[Omega]"}], "2"], TraditionalForm], 
+     "errors" -> {}, "input" -> "\\frac{N_ph\\omega}{2}", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], "-", " ", 
+   RowBox[{
+    TemplateBox[<|"boxes" -> FormBox[
+        FractionBox[
+         RowBox[{
+           StyleBox["m", "TI"], 
+           SuperscriptBox[
+            StyleBox["g", "TI"], "2"]}], 
+         SuperscriptBox[
+          StyleBox["h", "TI"], "2"]], TraditionalForm], "errors" -> {}, 
+      "input" -> "\\frac{mg^2}{h^2}", "state" -> "Boxes"|>,
+     "TeXAssistantTemplate"], " ", 
+    TemplateBox[<|"boxes" -> FormBox[
+        FractionBox[
+         RowBox[{
+           SubscriptBox[
+            StyleBox["N", "TI"], 
+            StyleBox["p", "TI"]], "(", 
+           RowBox[{
+             SubsuperscriptBox[
+              StyleBox["N", "TI"], 
+              StyleBox["p", "TI"], "2"], "-", "1"}], ")"}], "24"], 
+        TraditionalForm], "errors" -> {}, "input" -> 
+      "\\frac{N_p(N_p^2- 1)}{24}", "state" -> "Boxes"|>,
+     "TeXAssistantTemplate"]}]}]}]}], "Input",
+ CellChangeTimes->{{3.9191725705913467`*^9, 3.919172698212747*^9}, {
+  3.919172743064076*^9, 3.919172781428864*^9}, {3.919172830386469*^9, 
+  3.919172894932407*^9}},
+ CellLabel->"In[49]:=",ExpressionUUID->"709b0a00-cac0-4442-8cdd-b501f5b713e5"],
+
+Cell[BoxData[
+ RowBox[{"Evaluate", "[", 
+  TemplateBox[<|"boxes" -> FormBox[
+      SubscriptBox[
+       StyleBox["E", "TI"], "0"], TraditionalForm], "errors" -> {}, "input" -> 
+    "E_0", "state" -> "Boxes"|>,
+   "TeXAssistantTemplate"], "]"}]], "Input",
+ CellChangeTimes->{
+  3.9191729028503237`*^9, {3.919176125720355*^9, 3.919176142542245*^9}},
+ CellLabel->"In[58]:=",ExpressionUUID->"43484092-5639-47cd-a2d8-aec40e803f29"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.919176153719657*^9, 
+  3.919176153722466*^9}},ExpressionUUID->"99237a61-faed-4354-a006-\
+0f188144f528"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.919172905273176*^9, 
+  3.919172906663988*^9}},ExpressionUUID->"bb823f16-9e59-4a20-b56f-\
+b25b2559ccce"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.919172746914567*^9, 
+  3.919172747453271*^9}},ExpressionUUID->"dd54ff39-efa6-4616-8064-\
+8d1d396ff028"]
+},
+WindowSize->{1488, 893},
+WindowMargins->{{12, Automatic}, {11, Automatic}},
+FrontEndVersion->"13.2 for Mac OS X ARM (64-bit) (November 18, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"262f9aa8-377e-41ed-bd75-aa41094b5cf7"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 2778, 75, 257, "Input",ExpressionUUID->"709b0a00-cac0-4442-8cdd-b501f5b713e5"],
+Cell[3339, 97, 426, 9, 41, "Input",ExpressionUUID->"43484092-5639-47cd-a2d8-aec40e803f29"],
+Cell[3768, 108, 152, 3, 37, "Input",ExpressionUUID->"99237a61-faed-4354-a006-0f188144f528"],
+Cell[3923, 113, 152, 3, 37, "Input",ExpressionUUID->"bb823f16-9e59-4a20-b56f-b25b2559ccce"],
+Cell[4078, 118, 152, 3, 37, "Input",ExpressionUUID->"dd54ff39-efa6-4616-8064-8d1d396ff028"]
+}
+]
+*)
+

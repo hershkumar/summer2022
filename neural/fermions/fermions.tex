@@ -44,12 +44,13 @@
 \newtheorem{corollary}{corollary}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 
-\title{Fermionic Ansatz}
+\title{Fermionic NNVMC}
 \date{}
 
 \let\ve\varepsilon
 \let\vec\bm
 \begin{document}
+\section*{Fermionic Ansatz}
 We have a system of $N$ fermions, $N^\uparrow$ being spin up, and  $N^\downarrow$  being spin down:
 \begin{align*}
 	\underbrace{x_1,\dots, x_{N^\uparrow}}_{\text{Up spin}}, \underbrace{x_{N^\uparrow +1}, \dots, x_N}_{\text{Down spins}}
@@ -71,6 +72,37 @@ Our ansatz is
 \begin{align*}
 	\Psi(x_1,\dots x_N) &=  \underbrace{\Phi^\uparrow(x_1,\dots x_N)}_{\text{Anti. } \uparrow} \underbrace{\Phi^\downarrow(x_1,\dots
 	x_N)}_{\text{Anti. } \downarrow} \underbrace{f(x_1,\dots x_N)}_{\text{Symmetric}}e^{-\sum x_i^2}
+\end{align*}
+
+
+\section*{Delta Function Sampling}
+\subsection*{Energy Computation}
+\begin{align*}
+	E &= \frac{\int dx\, \psi^2 \left(-\frac{1}{2m}\frac{1}{\psi} \frac{d^2 \psi}{dx^2} + \frac{1}{2}m\omega^2 x^2\right)}{\int dx\, \psi^2} + \frac{\int dx\, N_\uparrow
+	N_\downarrow g \psi^2 \left(x\right) \frac{\psi^2\left(x'\right)}{\psi^2 \left(x\right)} d \left(x_\mu\right)}{\int dx\, \psi^2 \left(x\right)} \\ 
+	  &\to \braket{\underbrace{-\frac{1}{2m}\frac{1}{\psi} \frac{d ^2\psi}{d x^2} + \frac{1}{2}m\omega^2x^2}_{\text{E w/ no delta}} + \underbrace{N_\uparrow N_\downarrow g \frac{\psi^2
+	  \left(x'\right)}{\psi^2 \left(x\right)}d \left(x_\mu\right)}_{\text{E w/ delta}}}
+\end{align*}
+Where $x_\mu$ is the coordinate of the first down-spin fermion.
+\subsection*{Gradient Computation}
+
+\begin{align*}
+	\frac{\partial E}{\partial \theta} &= \frac{2 \int dx\, \psi^2 \left(x\right) \left(\frac{1}{\psi\left(x\right)}H\psi - E \right)\frac{1}{\psi} \partial_\theta
+	\psi\left(x\right)}{\int dx\, \psi^2 \left(x\right)} \\ 
+									   &= \frac{\int dx\, \psi^2 \left(x\right)
+										   \left(\frac{2}{\psi}\left(-\frac{1}{2}\frac{d ^2\psi}{d x^2} + \frac{1}{2}m\omega^2 x^2 \psi + g \delta \left(x_1-x_\mu\right)\psi -
+									   E\right)\frac{1}{\psi}\partial_\theta\psi\right)}{\int dx\, \psi^2 \left(x\right)} \\ 
+									   &= \frac{\int dx\, \psi^2 \left(x\right) \left(\frac{2}{\psi\left(x\right)}\left(-\frac{1}{2}\frac{1}{\psi}\frac{d
+									   ^2\psi}{dx^2} + \frac{1}{2}m\omega^2 x^2\right) - E\right)\partial_\theta \psi}{\int dx\, \psi^2\left(x\right)} +
+									   \frac{\int dx\, \psi^2 g \delta\left(x_1-x_\mu\right) \frac{2}{\psi} \partial_\theta \psi}{\int dx\, \psi^2 \left(x\right)} \\ 
+									   &= \frac{\int dx\, \psi^2 \left(x\right) \left(\frac{2}{\psi\left(x\right)}\left(-\frac{1}{2}\frac{1}{\psi}\frac{d
+									   ^2\psi}{dx^2} + \frac{1}{2}m\omega^2 x^2\right) - E\right)\partial_\theta \psi}{\int dx\, \psi^2\left(x\right)} +
+									   \frac{\int dx\, \psi^2 N_{\uparrow}N_\downarrow\frac{\psi^2 \left(x'\right)}{\psi^2 \left(x\right)}\frac{2g}{\psi
+									   \left(x'\right)}\partial_\theta \psi\left(x'\right)d \left(x_\mu\right)}{\int dx\, \psi^2\left(x\right)} \\ 
+									   &\to \braket{\left(-\frac{1}{2m}\frac{1}{\psi} \frac{d ^2\psi}{d x^2} + \frac{1}{2}m\omega^2x^2 -
+									   E\right)\frac{2}{\psi}\partial_\theta \psi + \left(N_\uparrow N_\downarrow g \frac{\psi^2
+	  \left(x'\right)}{\psi^2 \left(x\right)}d \left(x_\mu\right)\right)\frac{2\partial_\theta
+\psi\left(x'\right)}{\psi\left(x'\right)}}
 \end{align*}
 
 
