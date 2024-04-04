@@ -80,40 +80,37 @@ harmonic_omega = 1
 
 #######
 def step_size(params, start):
-    print("Searching for step size...")
-    lr = 0.5
+    lr = .1
     target = 0.5
-    # keep track of the closest step size to the target
-    closest = start
-    last_acc = None  # Store the last acceptance rate
-    # sample at the starting value
-    _, acc = sample(params, 800, 100, 10, start)
-    # measure distance to target
-    dist = abs(acc - target)
-    closest_dist = dist
-    # we accept the step size if the acceptance rate is within 0.05 of the target
-    num_steps = 0
-    while acc < target - 0.05 or acc > target + 0.05:
-        num_steps += 1
-        # if the current step size is closer to the target, update the closest step size
-        if dist < closest_dist:
-            closest = start
-        if num_steps > 100:
-            start = closest
-            break
-        # If we have a last_acc and the direction of update changes, reduce lr
-        if last_acc is not None:
-            if (last_acc < target and acc > target) or (
-                last_acc > target and acc < target
-            ):
-                lr *= 0.5  # Reduce learning rate by half when it overshoots
-        if acc < target:
-            start -= lr
-        else:
-            start += lr
-        last_acc = acc  # Update last_acc with the current acc before the next sample
-        _, acc = sample(params, 800, 100, 10, start)
-    return start
+    tolerance = .05
+    max_it = 1000
+    step = start
+    best_step = start
+    best_acc = 0
+    it_num = 0
+    # get the samples 
+    _, acc = sample(params, 1000, 100, 10, step)
+    # while the acceptance rate is not within +/- .5 of the target
+    while (acc < target - tolerance or acc > target + tolerance) and it_num < max_it:
+        it_num += 1
+        # if the acceptance rate is too low, increase the step size
+        if acc < target - tolerance:
+            step -= lr
+        # if the acceptance rate is too high, decrease the step size
+        elif acc > target + tolerance:
+            step += lr
+        # if we cross the target, decrease the learning rate and go back
+        if (acc < target and best_acc > target) or (acc > target and best_acc < target):
+            lr /= 2
+            step = best_step
+        # keep track of the best step size
+        if abs(acc - target) < abs(best_acc - target):
+            best_acc = acc
+            best_step = step
+        
+        # get the samples for the next step size
+        _, acc = sample(params, 1000, 100, 10, step)
+    return best_step
 
 
 # this just gets the shapes of the weights and biases for a neural network with the given structure
@@ -453,22 +450,22 @@ for i in range(N - 1):
 # determine the step size
 v = step_size(params, 2)
 opt_init, opt_update, get_params = jax_opt.adam(10 ** (-2))
-resultsa = train(params, 50, 1500, 500, 10, v)
+resultsa = train(params, 100, 1500, 500, 10, v)
 
-v = step_size(resultsa[3], 2)
+v = step_size(resultsa[3], v)
 opt_init, opt_update, get_params = jax_opt.adam(10 ** (-3))
-resultsb = train(resultsa[3], 100, 2000, 500, 10, v)
+resultsb = train(resultsa[3], 200, 2000, 500, 10, v)
 
 opt_init, opt_update, get_params = jax_opt.adam(10 ** (-4))
-v = step_size(resultsb[3], 2)
-resultsc = train(resultsb[3], 500, 2400, 500, 10, v)
+v = step_size(resultsb[3], v)
+resultsc = train(resultsb[3], 200, 6400, 500, 10, v)
 
-# v = step_size(resultsc[3], 1)
-# opt_init, opt_update, get_params = jax_opt.adam(10**(-5))
-# resultsd = train(resultsc[3], 50, 5000, 500, 10, v)
 
-params = resultsc[3]
-v = step_size(params, 1)
+v = step_size(resultsc[3], v)
+resultsd = train(resultsc[3], 100, 10000, 500, 15, v)
+
+params = resultsd[3]
+v = step_size(params, v)
 num_final_samples = 20000
 params = jax.device_put(params, device=jax.devices("cpu")[0])
 samples, _ = sample(params, num_final_samples, 1000, 1, v)

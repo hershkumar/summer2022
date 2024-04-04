@@ -32,14 +32,18 @@ for row in rows:
 
 plt.title(r"$\sum_i^N \left(- \frac{1}{2m} \frac{\partial^2}{\partial x_i^2} + \frac{1}{2}m \omega^2x_i^2\right)$, $N_\uparrow = N_\downarrow$")
 plt.xlabel("$N$")
-plt.ylabel("Energy")
-# plot the energy as a function of N_up
-plt.errorbar(Ns, Es, yerr=uncerts, fmt='o', label="Energy", color="red")
+plt.ylabel("Percent Difference")
 # plot the true energy
 Ns = np.array(Ns)
 true_energies = true(Ns/2, Ns/2)
-plt.plot(Ns, true_energies, label='Analytic Energy', color='black')
-plt.legend()
+# compute the percent difference between the true energy and the energy from the simulation
+Es = np.array(Es)
+uncerts = np.array(uncerts)
+test = gv.gvar(Es, uncerts)
+percent_diff = ((test - true_energies)/true_energies)*100
+split_e = [gv.mean(i) for i in percent_diff]
+split_u = [gv.sdev(i) for i in percent_diff]
+plt.errorbar(Ns, split_e, yerr=split_u, label="", fmt='o', color="red")
 plt.grid(True)
-
+plt.ylim(-.7,.7)
 plt.show()
