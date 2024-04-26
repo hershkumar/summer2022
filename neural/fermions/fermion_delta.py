@@ -91,7 +91,7 @@ GPU_INDEX = 1
 # division factor in the ansatz
 DIV = 2.5
 INITIAL_SAMPLE = jnp.array(np.random.uniform(-2, 2, N))
-phi_structure = [50,50]
+phi_structure = [20,20]
 
 m = 1
 hbar = 1
@@ -446,9 +446,12 @@ resultsc = train(resultsb[3], 200, 3000, 100, 10, find_step_size(resultsb[3], fi
 resultsd = train(resultsc[3], 200, 7400, 500, 10, find_step_size(resultsc[3], first_step_size))
 
 opt_init, opt_update, get_params = jax_opt.adam(10 ** (-4))
-resultse = train(resultsd[3], 100, 10000, 500, 10, find_step_size(resultsc[3], first_step_size))
+resultse = train(resultsd[3], 100, 10000, 500, 10, find_step_size(resultsd[3], first_step_size))
 
-params = resultse[3]
+opt_init, opt_update, get_params = jax_opt.adam(10 ** (-5))
+resultsf = train(resultse[3], 100, 15000, 1000, 15, find_step_size(resultse[3], first_step_size))
+
+params = resultsf[3]
 num_final_samples = 20000
 params = jax.device_put(params, device=jax.devices("cpu")[0])
 samples, samples_prime, _ = sample(params, num_final_samples, 100, 10, find_step_size(params, first_step_size))

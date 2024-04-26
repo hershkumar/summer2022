@@ -51,7 +51,7 @@ for row in rows:
     Es.append(E)
     uncerts.append(uncert)
 
-plt.title(r"$\sum_i^N \left(- \frac{1}{2m} \frac{\partial^2}{\partial x_i^2} + \frac{1}{2}m \omega^2x_i^2\right)$, $N_\downarrow = 1$")
+plt.title(r"$\sum_i^N \left(- \frac{1}{2m} \frac{\partial^2}{\partial x_i^2} + \frac{1}{2}m \omega^2x_i^2\right) + g\sum_{i<j} \delta(x_i - x_j)$, $N_\downarrow = 1, g = .2$")
 plt.xlabel(r"$N_\uparrow$")
 plt.ylabel("Percent Difference")
 true_energies = np.array([compute_true_energy(i) for i in Ns])
