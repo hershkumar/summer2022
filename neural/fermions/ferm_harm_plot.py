@@ -32,7 +32,7 @@ for row in rows:
 
 plt.title(r"$\sum_i^N \left(- \frac{1}{2m} \frac{\partial^2}{\partial x_i^2} + \frac{1}{2}m \omega^2x_i^2\right)$, $N_\uparrow = N_\downarrow$")
 plt.xlabel("$N$")
-plt.ylabel("Percent Difference")
+plt.ylabel(r"Percent Difference in $\langle E_0 \rangle$")
 # plot the true energy
 Ns = np.array(Ns)
 true_energies = true(Ns/2, Ns/2)
