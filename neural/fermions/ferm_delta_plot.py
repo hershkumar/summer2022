@@ -65,4 +65,5 @@ split_u = [gv.sdev(i) for i in percent_diff]
 plt.errorbar(Ns, split_e, yerr=split_u, label="", fmt='o', color="red")
 plt.grid(True)
 plt.ylim(-5,5)
+plt.savefig("fermion_delta.svg", format="svg")
 plt.show()

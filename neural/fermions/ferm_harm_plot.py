@@ -46,4 +46,5 @@ split_u = [gv.sdev(i) for i in percent_diff]
 plt.errorbar(Ns, split_e, yerr=split_u, label="", fmt='o', color="red")
 plt.grid(True)
 plt.ylim(-.7,.7)
+plt.savefig("ferm_harmonic_nodelta.svg", format="svg")
 plt.show()
