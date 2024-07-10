@@ -1,0 +1,4 @@
+\contentsline {section}{\numberline {1}Bosonic Ansatz}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Energy and Gradient}{2}{subsection.1.1}%
+\contentsline {section}{\numberline {2}Fermionic Ansatz}{2}{section.2}%
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

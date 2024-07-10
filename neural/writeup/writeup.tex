@@ -1,0 +1,100 @@
+\documentclass{notes}
+
+\usepackage{amsmath}
+\usepackage{braket}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{minted}
+\usepackage{bm}
+\usepackage{esint}
+\usepackage{gensymb}
+\usepackage{mathrsfs}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\newcommand{\img}[2]{\includegraphics[scale=#1]{/Users/hersh/Library/CloudStorage/GoogleDrive-hershkumar13@gmail.com/My Drive/GoodNotes/Physics/Figures/#2}}
+\newcommand{\fimg}[2]{\begin{figure}[H]\img{#1}{#2}\end{figure}}
+
+
+\newtheorem{postulate}{Postulate}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{corollary}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\title{Bosonic and Fermionic NN-VMC}
+\date{}
+
+\let\ve\varepsilon
+\let\vec\bm
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+\section{Bosonic Ansatz}
+Consider the system of $N$ bosons, with Hamiltonian:
+ \begin{align*}
+	 \hat{H} &= \sum_{i=1}^N \left(-\frac{1}{2m}\frac{\partial ^2}{\partial x_i^2} + \frac{1}{2}m\omega^2 x_i^2\right) + \sum_{i<j}^N
+	 \left(g\delta\left(x_i-x_j\right) + \sigma  |x_i - x_j|\right)
+\end{align*}
+Where our interaction strength parameters are $g$ and  $\sigma$.
+
+
+We define our bosonic ansatz $\psi_B$:
+ \begin{align*}
+	 \psi_B \left(x_1,x_2,\dots,x_N\right) &= e^{-\mathcal{A}\left(x_1,x_2,\dots,x_N\right)}
+\end{align*}
+where 
+ \begin{align*}
+	 \mathcal{A}\left(x_1,x_2,\dots, x_N\right) &= \text{NN}\left(\xi_1,\xi_2,\dots,\xi_N\right) + \omega \sum_{i}^N x_i^2 
+\end{align*}
+Where $\text{NN}$ is the neural network function, and  $\omega$ is a constant.
+
+\subsection{Energy and Gradient}
+We can compute the energy expectation value:
+ \begin{align*}
+	 \mathcal{E} &= \left\langle \sum_i \frac{1}{2m}\left(\frac{\partial ^2 \mathcal{A}}{\partial x_i^2} - \left(\frac{\partial \mathcal{A}}{\partial x_i}\right)^2\right)
+		 + \frac{1}{2}m\omega^2x_i^2 + \sum_{i<j} \left(\sigma |x_i-x_j|\right) + g \frac{N \left(N-1\right)}{2} \frac{e^{-2
+		 \mathcal{A}\left(x_1,x_1,\dots,x_N\right)}}{e^{-2 \mathcal{A}\left(x_1,x_2,\dots,x_N\right)}}\mathcal{D}\left(x_2\right)
+	 \right\rangle_{\psi}
+\end{align*}
+And the gradient in parameter space:
+\begin{align*}
+	\frac{\partial \mathcal{E}}{\partial \theta} &= 2 \mathcal{E}\cdot \left\langle \frac{\partial \mathcal{A}\left(x_1,\dots,x_N\right)}{\partial \theta}
+		\right\rangle_{\psi} \\ &- 2 \left\langle \frac{\partial \mathcal{A}\left(x_1,\dots,x_N\right)}{\partial \theta} \left[\sum_i
+	\frac{1}{2m}\left(\frac{\partial ^2 \mathcal{A}}{\partial x_i^2 } - \left(\frac{\partial \mathcal{A}}{\partial x_i}\right)^2\right) +
+\frac{1}{2}m\omega^2 x_i^2 + \sum_{i<j}\left(\sigma | x_i - x_j|\right)\right]\right\rangle_{\psi} \\ 
+								&- 2g \frac{N\left(N - 1\right)}{2} \left\langle \frac{\partial \mathcal{A}\left(x_1,x_1,\dots,x_N\right)}{\partial \theta}\frac{e^{-2
+								\mathcal{A}\left(x_1,x_1,\dots,x_N\right)}}{e^{-2 \mathcal{A}\left(x_1,x_2,\dots,x_N\right)}}
+							\mathcal{D}\left(x_2\right)\right\rangle_{\psi}
+\end{align*}
+
+\section{Fermionic Ansatz}
+
+\end{document}
