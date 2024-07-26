@@ -550,7 +550,7 @@ def precise_val(params, g):
     return mean_energy, max(us)
 
 def precise_val_acc(params, g):
-    temp = accumulator_gradient(params, g, 1000000, 1000, 10, find_step_size(params, .3))
+    temp = accumulator_gradient(params, g, 2000000, 1000, 10, find_step_size(params, .3))
     return temp[1], temp[2]
 
 print("Loading parameters...")
