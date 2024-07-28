@@ -532,8 +532,8 @@ samples = sample(params, 1000, 100, 5, step_size, progress=True)
 
 
 step_size = .3
-params = load_params("4+5_g_0.pkl")
-g = 0
+params = load_params("4+5_g_-1.pkl")
+g = -1
 
 opt_init, opt_update, get_params = jax_opt.adam(10 ** (-4))
 
@@ -543,4 +543,4 @@ resultsb = train(resultsa[3], 500,10000,100,10, find_step_size(resultsa[3],step_
 resultsc = acc_train(resultsb[3], 100, 50000,100,10, find_step_size(resultsb[3],step_size), g)
 resultsd = acc_train(resultsc[3], 5, 300000,100,10, find_step_size(resultsc[3],step_size), g)
 # save the parameters
-save_params(resultsd[3], "4+5_g_0_PRECISE.pkl")
+save_params(resultsd[3], "4+5_g_-1_PRECISE.pkl")
