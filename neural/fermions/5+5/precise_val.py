@@ -550,8 +550,14 @@ def precise_val(params, g):
     return mean_energy, max(us)
 
 def precise_val_acc(params, g):
-    temp = accumulator_gradient(params, g, 2000000, 1000, 10, find_step_size(params, .3))
-    return temp[1], temp[2]
+    measurements = []
+    # find the stepsize first
+    step_size = find_step_size(params, .3)
+    for i in trange(6):
+        temp = accumulator_gradient(params, g, 2000000, 1000, 10, step_size)
+        measurements.append(gv.gvar(temp[1], temp[2]))
+    ret = np.mean(measurements)
+    return gv.mean(ret), gv.sdev(ret)
 
 print("Loading parameters...")
 # now the actual important part
@@ -568,7 +574,7 @@ print("Done!")
 print(final)
 
 rows = []
-rows.append([num_parameters, g, final[0].item(), final[1]])
+rows.append([num_parameters, g, final[0], final[1]])
 
 # write the rows to the csv file
 with open(sys.argv[3], "a", newline='') as f:
