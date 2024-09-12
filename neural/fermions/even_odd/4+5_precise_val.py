@@ -1,5 +1,6 @@
 # N = N_up + N_down fermions in a harmonic trap, with delta function interaction
 
+import csv
 import os
 import sys
 os.environ["XLA_PYTHON_CLIENT_PREALLOCATE"]="False"

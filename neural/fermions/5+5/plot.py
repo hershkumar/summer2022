@@ -4,7 +4,8 @@ import gvar as gv
 
 
 # import the data from precision_vals.csv
-data = np.genfromtxt('precision_vals.csv', delimiter=',', skip_header=0)
+data = np.genfromtxt('5+5_final.csv', delimiter=',', skip_header=0)
+data = np.genfromtxt('5+5_unified.csv', delimiter=',', skip_header=0)
 
 # x axis is the second column
 x = data[:,1]

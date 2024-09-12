@@ -1,0 +1,158 @@
+
+\documentclass
+[amsmath,10pt,aps,preprintnumbers,onecolumn,groupedaddress,superscriptaddress,notitlepage,nofootinbib,prd]{revtex4-1}
+\usepackage[utf8]{inputenc}
+\usepackage{indentfirst}
+\usepackage{amssymb}
+\usepackage{amsmath,latexsym}
+\usepackage{graphicx}
+\usepackage{float}
+% \usepackage[margin=0.75in]{geometry}
+% \usepackage[letterpaper,top=3cm,bottom=2cm,left=1.5cm,right=1.5cm]{geometry}
+\usepackage{mathrsfs} % makes \mathscr into curly font
+\usepackage{color}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{soul}
+\usepackage{slashed}
+\usepackage{feynmf}
+\usepackage{braket}
+\usepackage{comment}
+\usepackage{enumitem}
+
+\usepackage{bbold}
+\usepackage[bbgreekl]{mathbbol}
+
+\usepackage{graphicx} % Required for inserting images
+
+\usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
+
+
+% \input mylatex.tex
+
+\begin{document}
+
+\title{Machine learning approach to trapped many-fermion systems}
+
+
+\author{Paulo F. Bedaque}
+\email{bedaque@umd.edu}
+\affiliation{Department of Physics,
+University of Maryland, College Park, MD 20742}
+\author{Hersh Kumar}
+\email{hekumar@umd.edu}
+\affiliation{Department of Physics,
+University of Maryland, College Park, MD 20742}
+\author{Andy Sheng}
+\email{asheng@umd.edu}
+\affiliation{Department of Physics,
+University of Maryland, College Park, MD 20742}
+
+\date{\today}
+
+\begin{abstract}
+We do many important things.
+
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+\begin{itemize}
+    \item Develop general neural net ansatz for systems of fermions with 2 species in 1D
+    \item Apply ansatz to systems of harmonically trapped fermions with $\delta$ function interactions
+    \item Have results for 5+5 with strongly repulsive interactions
+    \item Have results for 4+4,4+5,5+5 with attractive interactions
+    \item Andy's results for the impurity cases
+    \item Transfer learning to increase the coupling 
+    \item Parameter extrapolation to make guess of starting parameters
+\end{itemize}
+
+\section{Methods}
+Given the Hamiltonian of a system of $N = N_\uparrow + N_\downarrow$ fermions, we would like to solve the time-independent Schr\"{o}dinger equation for the ground state
+wavefunction and energy. To do so, we utilize the variational method; any arbitrary wavefunction $\psi$ must have an expectation value of the energy that is greater than
+or equal to the ground state energy. In general, the wavefunction is given by a chosen $\psi\left(\vec{x}, \theta\right)$, where $\vec{x}$ are the positions of the fermions and $\theta$ are variational parameters.
+Typically, the energy  $\braket{E\left(\theta\right)}$ is then minimized with respect to the variational parameters $\theta$ to obtain an estimate for the ground state of the system.
+
+\subsection{Neural Networks}
+\todo{Talk about the benefits of NN VMC}
+The quality of the estimate provided by the variational method is dependent on the choice of ansatz, in particular the functional form of the ansatz as well as the number of
+parameters used. Good guesses for the functional form of the ground state wavefunction can be obtained via expectations or knowledge of the system, but the
+application of neural networks allows for a more general search through the space of wavefunctions.
+
+\subsection{Fermionic Ansatz}
+An ansatz for the ground state wavefunction for a system of $N_\uparrow$ spin up fermions and $N_\downarrow$ spin down fermions should enforce antisymmetry under the exchange of fermions of the same spin. For a system of $N = N_\uparrow + N_\downarrow$ fermions, we have particle coordinates from 1 to $N$:
+\begin{equation}
+    x_1,\dots, x_{N_\uparrow}, x_{N_\uparrow + 1},\dots, x_{N}
+\end{equation}
+Where $x_1,\dots,x_{N_\uparrow}$ denote the positions of the spin up fermions, and $x_{N_\uparrow + 1},\dots, x_{N}$ denote the positions of the spin down fermions. In order to construct an ansatz that ensures the necessary exchange antisymmetry, we construct a Slater
+determinant of functions $\{\phi_i\}$
+\begin{equation}
+	\Phi^\uparrow \left(\vec{x}\right) = \frac{1}{\sqrt{N!}} \begin{vmatrix}
+		\phi_{1,1} & \phi_{1,2} & \cdots \\ 
+		\phi_{2,1} & \phi_{2,2}   \\ 
+		\vdots & & \ddots
+	\end{vmatrix}
+\end{equation}
+
+Where $\phi_{i,j}$ denotes a neural network function  $\phi_i\left(x_j, x_1,\dots x_{j-1}, x_{j+1}, \dots x_N\right)$, which is symmetric (using the Newton-Girard identities)\todo{This needs to be explained somewhere}
+with respect to all coordinates other than $x_j$:
+\begin{equation}
+	\begin{split}
+	\phi_i \left(x_j, x_1,\dots, x_k,\dots x_{j-1}, x_{j+1}, \dots, x_l,\dots,x_N\right)
+	\\= \phi_i \left(x_j, x_1,\dots, x_l,\dots x_{j-1}, x_{j+1}, \dots, x_k,\dots,x_N\right)
+	\end{split}
+\end{equation}
+Similarly, we define a function $\Phi^\downarrow$ in terms of the $\phi_{i,j}$ functions
+\begin{equation}
+\Phi^\downarrow\left(\vec{x}\right) = \frac{1}{\sqrt{N!}}\begin{vmatrix}
+	\phi_{N_\uparrow+1, N_\uparrow+1} & \phi_{N_\uparrow+1, N_\uparrow + 2} & \dots \\ 
+	\phi_{N_\uparrow + 2, N_\uparrow + 1} & \phi_{N_\uparrow + 2, N_\uparrow+2} \\ 
+	\vdots &  & \ddots
+\end{vmatrix}	
+\end{equation}
+
+We can then construct the fermionic ansatz, via the product of the two Slater determinants, and a Gaussian to minimize the wavefunction at infinity.
+\begin{equation}
+	\psi_F \left(\vec{x}\right) = \Phi^\uparrow\left(\vec{x}\right) \Phi^\downarrow\left(\vec{x}\right) e^{-\sum_{i}^N x_i^2}
+\end{equation}
+The Slater determinants are antisymmetric with respect to their set of coordinates, that is, $\Phi^\uparrow$ is antisymmetric under interchange of the up spin particles, and
+$\Phi^\downarrow$ is antisymmetric under interchange of the down spin particles. The  $\Phi$ functions have no other constructed symmetries, and therefore the ansatz is
+antisymmetric under interchange of fermions of the same spin, as desired. The variational parameters of the ansatz are the weights and biases of the neural network functions $\{\phi_{i}\}$, which are implemented to be identical in the number of layers and nodes.
+
+\subsection{Neural Network Architecture}
+
+\subsection{Systems}
+In order to demonstrate the neural network solution, we apply our methodology to solve for the ground state wavefunctions and energies for a particular one-dimensional
+system of fermions. We consider a system of harmonically trapped fermions, consisting of two species, interacting via a contact $\delta$-function potential. \todo{Is there a model that this
+is related to?}
+\todo{Why is this model important}  
+
+
+\section{Training}
+\subsection{Transfer Learning}
+When probing systems with large values of the coupling $g$, numerical instabilities in the gradient descent process can arise when the value of $g$ is increased rapidly. \todo{Give an explanation for this?}
+We utilize transfer learning in order to decrease the necessary number of training steps, as well as instabilities in the optimization. The neural networks are trained on a
+particular value of $g$, and then reused for systems with larger values of  $g$, which starts the gradient descent algorithm at a point in the space of parameters that is closer
+to the ground state configuration. 
+
+\begin{itemize}
+    \item For probing systems with larger $g$, increasing $g$ immediately can lead to numerical instabilities in the gradient descent algorithm
+    \item Instead, we train the model by stepping $g$ up slowly
+    \item After training on a particular value of $g$, we can use the parameters of the trained model on a system with slightly larger $g$, which decreases the training time and provides a smoother gradient descent
+\end{itemize}
+\subsection{Parameter Extrapolation}
+After the neural networks are trained on several values of the coupling constant $g$, we extrapolate the evolution of each parameter to systems with higher $g$, which decreases the training time by providing a starting point that is closer to the ground state parameters.
+
+Given a set of previous $g$ values, and the value of the parameter after the model is trained for each respective $g$, we attempt a linear fit, and compute the coefficient of determination, $R^2$. If the $R^2$ value is below a chosen threshold, we instead attempt a linear fit on the last $3$ values of the parameter\todo{Explain why this was chosen}. If the $R^2$ value of the second fit is again below the threshold, the value of the parameter for the last value of $g$ is chosen, otherwise, the chosen linear fits are used to estimate the value of the parameter for the value of $g$ that we are training the model on.\todo{Clunky. Reword.}
+
+\todo{Get proof of the speedup generated by the parameter evolution technique.}
+
+\subsection{Hyperparameters}
+
+\section{Results}
+\subsection{Impurity}
+\subsection{Attractive Regime}
+\subsection{Nonperturbative Repulsive Regime}
+\section{Discussion}
+
+\end{document}

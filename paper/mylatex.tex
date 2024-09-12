@@ -1,0 +1,168 @@
+% ----------------------------------------------------------------
+% AMS-LaTeX Paper ************************************************
+% **** -----------------------------------------------------------
+
+\usepackage{graphics,setspace,epsfig,color}
+\usepackage[letterpaper, dvips,width=7.5in,height=8.5in,includemp=false]{geometry}
+
+%%%%%%  PACKAGES  %%%%%%%%%%%%
+\usepackage[vcentermath]{}
+%\usepackage{mathbbol}
+\usepackage{epsf}
+\usepackage{amscd}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{braket}
+\usepackage{bbm}
+
+\usepackage[dvipsnames]{xcolor} %% color names can be found at https://www.overleaf.com/learn/latex/Using_colours_in_LaTeX
+%\usepackage{bbold}
+
+
+
+\vfuzz2pt % Don't report over-full v-boxes if over-edge is small
+\hfuzz2pt % Don't report over-full h-boxes if over-edge is small
+\usepackage{tcolorbox}
+
+%%%%%%  MACROS   %%%%%%%%%%%%%
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\To}{\longrightarrow}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\Dslash}{D\!\!\!\slash}
+\newcommand{\partialslash}{\partial\!\!\!\slash}
+\newcommand{\dslash}{d\!\!\!\slash}
+\newcommand{\Pslash}{P\!\!\!\!\slash}
+\newcommand{\pslash}{p\!\!\!\slash}
+\newcommand{\Qslash}{Q\!\!\!\!\slash}
+\newcommand{\qslash}{q\!\!\!\slash}
+\newcommand{\CA}{{\cal A}}
+\newcommand{\CB}{{\cal B}}
+\newcommand{\CC}{{\cal C}}
+\newcommand{\CaD}{{\cal D}}
+\newcommand{\CE}{{\cal E}}
+\newcommand{\CH}{{\cal H}}
+\newcommand{\CL}{{\cal L}} 
+\newcommand{\CM}{{\cal M}}
+\newcommand{\CG}{{\cal G}}
+\newcommand{\CO}{{\cal O}}
+\newcommand{\CR}{{\cal R}}
+\newcommand{\CU}{{\cal U}}
+\newcommand{\beq}{\begin{equation}}
+\newcommand{\eeq}{\end{equation}}
+\newcommand{\bea}{\begin{eqnarray}}
+\newcommand{\eea}{\end{eqnarray}}
+\newcommand{\RN}{{\mathbb{R}^N}}
+\newcommand{\nn}{\nonumber}
+\newcommand{\bbn}{\mathbbm{n}}
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bfa}{\mathbf{a}}
+\newcommand{\bfb}{\mathbf{b}}
+\newcommand{\bfc}{\mathbf{c}}
+\newcommand{\bfd}{\mathbf{d}}
+\newcommand{\bfe}{\mathbf{e}}
+\newcommand{\bff}{\mathbf{f}}
+\newcommand{\bfg}{\mathbf{g}}
+\newcommand{\bfh}{\mathbf{h}}
+\newcommand{\bfj}{\mathbf{j}}
+\newcommand{\bfk}{\mathbf{k}}
+\newcommand{\bfl}{\mathbf{l}}
+\newcommand{\bfm}{\mathbf{m}}
+\newcommand{\bfn}{\mathbf{n}}
+\newcommand{\bfp}{\mathbf{p}}
+\newcommand{\bfq}{\mathbf{q}}
+\newcommand{\bfr}{\mathbf{r}}
+\newcommand{\bfs}{\mathbf{s}}
+\newcommand{\bft}{\mathbf{t}}
+\newcommand{\bfu}{\mathbf{u}}
+\newcommand{\bfv}{\mathbf{v}}
+\newcommand{\bfx}{\mathbf{x}}
+\newcommand{\bfy}{\mathbf{y}}
+\newcommand{\bfz}{\mathbf{z}}
+\newcommand{\bfw}{\mathbf{w}}
+\newcommand{\bfi}{\mathbf{i}}
+\newcommand{\bfJ}{\mathbf{J}}
+\newcommand{\bfT}{\mathbf{T}}
+\newcommand{\balpha}{{\bm \alpha}}
+% \newcommand{\bbeta}{{\bm \beta}}
+\newcommand{\btheta}{{\pmb \theta}}
+\newcommand{\bsigma}{{\bm \sigma}}
+
+   \newcommand{\bbOmega}{\mbox{$
+  \raisebox{0.37ex}
+  {   \scalebox{0.65}{$|$} }
+   \hspace{-0.7em}
+  \Omega
+  %\hspace{-0.20em2
+ % \raisebox{+0.88ex}
+ % {$\color{black}.$}
+  \hspace{0.0em}
+  $}
+  {}}
+
+  
+  \newcommand{\bbsquare}{\mbox{$
+  \raisebox{0.37ex}
+  {   \scalebox{0.65}{$|$} }
+   \hspace{-0.64em}
+  \Box
+  %\hspace{-0.20em2
+ % \raisebox{+0.88ex}
+ % {$\color{black}.$}
+  \hspace{0.0em}
+  $}
+  {}}
+
+
+  
+
+\newcommand{\av}[1]{\langle#1\rangle}
+\graphicspath{{figures/}}
+\def\beqamss#1\eeqs{\beq\begin{split} #1 \end{split}\eeq}
+\def\dd#1#2{\frac{d #1}{d #2}}
+\def\pd#1#2{\frac{\partial #1}{\partial #2}}
+\let\Re\relax 
+\DeclareMathOperator\Re{Re}
+\let\Im\relax 
+\DeclareMathOperator\Im{Im}
+\let\Tr\relax 
+\DeclareMathOperator\Tr{Tr}
+%\DeclareMathOperator\Tr{Tr}
+\DeclareMathOperator\sign{sign}
+\newcommand{\eq}[1]{Eq.~\ref{#1}}
+\newcommand{\fig}[1]{Fig.~\ref{#1}}
+\newcommand{\tab}[1]{Table~\ref{#1}}
+\newcommand{\sect}[1]{section~\ref{#1}}
+
+
+
+
+\usepackage[colorlinks=true,backref=true, linktocpage=true,
+citecolor=blue,urlcolor=blue,linkcolor=blue,pdfpagemode=UseOutlines]{hyperref}
+
+\hypersetup{%
+  bookmarksnumbered=true,
+  pdftitle = {},
+  pdfsubject = {},
+  pdfauthor = {},
+  pdfkeywords = {}
+}
+
+
+
+
